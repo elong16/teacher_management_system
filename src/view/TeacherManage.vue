@@ -22,27 +22,33 @@
 
 
         <div class="value" style="display: flex;">
-          <div>入职时间 :</div>
+          <div>学院 :</div>
           <div>
-            <el-date-picker
-                style="width: 200px;height:30px;margin-left: 40px;"
-                class="value-input"
-                prefix-icon="calendar"
-                v-model="payTime"
-                type="datetimerange"
-                start-placeholder=""
-                end-placeholder=""
-                :default-value=defaultTime
-                size="small"
-            />
+            <input class="value-input"/>
           </div>
         </div>
 
 
         <el-button>查询</el-button>
+        <div style="margin-left: 30px;">
+          <el-button type="primary">添加教师</el-button>
+        </div>
 
-
+        <el-upload
+            ref="uploadRef"
+            class="upload-demo"
+            action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+            :auto-upload="false"
+            style="margin-left: 30px"
+        >
+          <template #trigger>
+            <el-button type="primary">批量导入</el-button>
+          </template>
+        </el-upload>
       </div>
+
+
+
     </div>
 
     <!--  教师列表-->
@@ -50,20 +56,18 @@
       <el-table :data="teacherVos" stripe style="width: 90%;margin: 40px" border size="small">
         <el-table-column prop="teacherId" label="工号"></el-table-column>
         <el-table-column prop="teacherName" label="姓名"></el-table-column>
-        <el-table-column prop="sex" label="性别"></el-table-column>
-        <el-table-column prop="age" label="年龄"></el-table-column>
-        <el-table-column prop="phoneNumber" label="电话号码"></el-table-column>
-        <el-table-column prop="employmentDate" label="入职时间"></el-table-column>
-        <el-table-column prop="address" label="家庭住址"></el-table-column>
+        <el-table-column prop="college" label="学院"></el-table-column>
         <el-table-column prop="academicTitle" label="职称"></el-table-column>
         <el-table-column prop="eduBackground" label="学历"></el-table-column>
         <el-table-column prop="email" label="邮箱"></el-table-column>
-        <el-table-column label="操作">
-          <template #default="scope">
-            <el-button type="text" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
+
+        <el-table-column label="操作" >
+          <template #default="scope" >
+            <el-button type="text" @click="gotoDetail(scope.row)" size="mini" style="font-size: 12px ">查看详细信息</el-button>
+            <el-button type="text" @click="handleEdit(scope.row)" size="mini" style="font-size: 12px ">编辑</el-button>
             <el-popconfirm title="确定删除吗？" @confirm="handleDelete(scope.row.id)">
               <template #reference>
-                <el-button type="text" size="mini">删除</el-button>
+                <el-button type="text" size="mini" style="font-size: 12px ">删除</el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -72,6 +76,20 @@
 
     </div>
 
+<!--    分页-->
+    <div class="page">
+      <el-pagination
+          v-model:currentPage="currentPage3"
+          v-model:page-size="pageSize3"
+          :small="small"
+          :disabled="disabled"
+          :background="background"
+          layout="prev, pager, next, jumper"
+          :total="50"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+      />
+    </div>
 
     <!--    编辑的表单-->
 
@@ -153,6 +171,7 @@ export default {
         }],
       form: {},
       dialogVisible: false,
+      entryTime:'',
     }
   },
   methods: {
@@ -160,6 +179,9 @@ export default {
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogVisible = true
     },
+    gotoDetail(){
+      this.$router.push("/teacherInfo")
+    }
   }
 }
 </script>
@@ -191,5 +213,10 @@ export default {
 
 .search .search-value .value .value-input:focus {
   border-color: #88ddff;
+}
+
+
+.page{
+  margin-left: 400px;
 }
 </style>

@@ -7,11 +7,11 @@
         <el-form ref="form" :model="form">
           <el-form-item prop="username">
             <el-input class="account" prefix-icon="el-icon-user-solid" v-model="form.username"
-                      size="large"></el-input>
+                      size="large" placeholder="请输入用户名"></el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input class="password" prefix-icon="el-icon-lock" v-model="form.password" show-password
-                      size="large"></el-input>
+                      size="large" placeholder="请输入密码"></el-input>
           </el-form-item>
           <div style="display:flex">
             <el-input type="text" v-model="inputCode" class="inputyzm" placeholder="请输入验证码" clearable
@@ -75,6 +75,19 @@ export default {
         this.createCode()
         return
       }
+      if (this.form.username!="admin")
+      {
+        this.$message.error("用户名不存在")
+        return
+      }
+      if (this.form.password=="123456")
+      {
+        this.$message.success("登陆成功")
+        this.$router.push("/userInfo")
+      }else{
+        this.$message.error("密码不正确")
+
+      }
 
     },
 
@@ -89,14 +102,19 @@ export default {
 </script>
 
 <style scoped>
+*,body,html{
+  padding: 0;
+}
 .main {
-  width: 100%;
-  height: 100vh;
-  background-color: darkturquoise;
+  width: 95%;
+  height: 95vh;
+  background-image: linear-gradient(deepskyblue,#cccccc, ghostwhite);
+
+
   overflow: hidden;
 }
 
-.login {
+.main .login {
   width: 400px;
   margin: 150px auto;
 }
@@ -119,6 +137,8 @@ export default {
   background-color: whitesmoke;
   width: 500px;
   height: 500px;
+  border-radius: 20px;
+  opacity: .65;
 }
 
 .account {

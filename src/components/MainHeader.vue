@@ -17,6 +17,7 @@
         active-text-color="#ffc100"
         :router="true"
         :default-active="$route.path"
+        menu-trigger="hover"
     >
 
       <el-sub-menu index="1" style="margin-right: 20px">
@@ -27,12 +28,19 @@
       <el-sub-menu index="2" style="margin-right: 20px">
         <template #title>系统管理</template>
         <el-menu-item index="/teacherManage">教师管理</el-menu-item>
+        <el-menu-item index="/accountManage">账号管理</el-menu-item>
       </el-sub-menu>
       <el-sub-menu index="3">
         <template #title>课程管理</template>
-        <el-menu-item index="3-1">教师课程管理</el-menu-item>
-        <el-menu-item index="3-2">开设课程</el-menu-item>
+        <el-menu-item index="/teacherCourse">教师课程管理</el-menu-item>
+        <el-menu-item index="/openCourse">开设课程</el-menu-item>
         <el-menu-item index="/courseList">教师任课课表</el-menu-item>
+      </el-sub-menu>
+      <el-sub-menu index="4">
+        <template #title>工资管理</template>
+        <el-menu-item index="#">工资补助</el-menu-item>
+        <el-menu-item index="#">教师工资管理</el-menu-item>
+        <el-menu-item index="#">工资详细</el-menu-item>
       </el-sub-menu>
 
     </el-menu>
@@ -75,7 +83,7 @@ export default {
   width: 200px;
   text-align: center;
   line-height: 50px;
-  font-size: 24px;
+  font-size: 21px;
 
 
 }

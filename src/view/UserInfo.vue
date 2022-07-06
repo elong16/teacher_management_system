@@ -18,6 +18,7 @@
         <div>家庭住址 : {{userInfo.address}}</div>
         <div>职称 : {{userInfo.academicTitle}}</div>
         <div>学历 : {{userInfo.eduBackground}}</div>
+        <div>学院 : {{userInfo.college}}</div>
         <div>手机号 : {{userInfo.phoneNumber}}</div>
         <div>邮箱 : {{userInfo.email}}</div>
       </div>
@@ -87,6 +88,7 @@ export default {
   display: flex;
   margin-left: 30px;
   margin-top: 5px;
+  margin-bottom: 30px;
 }
 
 .user-info .info {
